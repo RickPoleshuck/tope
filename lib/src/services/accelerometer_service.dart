@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:sensors_plus/sensors_plus.dart';
+import 'package:location/location.dart';
 
 class AccelerometerService {
   double _threshold = 2.0;

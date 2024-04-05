@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tope/src/accelerometer_feature/accelerometer_view.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
 
 import '../settings/settings_view.dart';
@@ -30,11 +29,10 @@ class AccelerometerListView extends StatelessWidget {
           ),
         ],
       ),
-
       body: StreamBuilder<double>(
         stream: AccelerometerService().listen().stream,
         builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
-          List<Widget> children;
+          List<Widget> children = [];
           if (snapshot.hasError) {
             children = <Widget>[
               const Icon(
@@ -51,10 +49,10 @@ class AccelerometerListView extends StatelessWidget {
                 child: Text('Stack trace: ${snapshot.stackTrace}'),
               ),
             ];
-          }  else {
+          } else {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
-                children = const <Widget>[
+                children = const [
                   Icon(
                     Icons.info,
                     color: Colors.blue,
@@ -66,7 +64,7 @@ class AccelerometerListView extends StatelessWidget {
                   ),
                 ];
               case ConnectionState.waiting:
-                children = const <Widget>[
+                children = const [
                   SizedBox(
                     width: 60,
                     height: 60,
@@ -78,19 +76,14 @@ class AccelerometerListView extends StatelessWidget {
                   ),
                 ];
               case ConnectionState.active:
-                children = <Widget>[
-                  const Icon(
-                    Icons.check_circle_outline,
-                    color: Colors.green,
-                    size: 60,
-                  ),
+                children!.add(
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Text('Acceleration: ${snapshot.data}'),
                   ),
-                ];
+                );
               case ConnectionState.done:
-                children = <Widget>[
+                children = [
                   const Icon(
                     Icons.info,
                     color: Colors.blue,
