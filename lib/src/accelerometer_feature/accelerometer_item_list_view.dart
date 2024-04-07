@@ -2,25 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
 
 import '../settings/settings_view.dart';
-import 'accelerometer_item.dart';
 
 /// Displays a list of SampleItems.
 class AccelerometerListView extends StatefulWidget {
-  const AccelerometerListView({
-    super.key,
-    this.items = const [SampleItem(1), SampleItem(2), SampleItem(3)],
-  });
-
   static const routeName = '/';
-
-  final List<SampleItem> items;
 
   @override
   State<AccelerometerListView> createState() => _AccelerometerListViewState();
 }
 
 class _AccelerometerListViewState extends State<AccelerometerListView> {
-  List<Widget> _bumps = [];
+  final List<Widget> _bumps = [];
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +84,11 @@ class _AccelerometerListViewState extends State<AccelerometerListView> {
                 );
               case ConnectionState.active:
                 _bumps.add(
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Text('Acceleration: ${snapshot.data!.toStringAsFixed(3)}', style: const TextStyle(fontSize: 20),),
+                  ListTile(
+                    title: Text(
+                      'Acceleration: ${snapshot.data!.toStringAsFixed(3)}',
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
                 );
                 return ListView(

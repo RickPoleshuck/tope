@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                     return const AccelerometerView();
                   case AccelerometerListView.routeName:
                   default:
-                    return const AccelerometerListView();
+                    return AccelerometerListView();
                 }
               },
             );
