@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:sensors_plus/sensors_plus.dart';
-import 'package:location/location.dart';
 
 class AccelerometerService {
   double _threshold = 2.0;
@@ -35,8 +34,8 @@ class AccelerometerService {
     return streamController;
   }
 
-  /// Return maximum acceleration from all 3 directions. @TODO - be smarter and return maximum vector.
+  /// Return maximum acceleration from all 3 directions.
   double _getAcceleration(UserAccelerometerEvent e) {
-    return max(max(e.x.abs(), e.y.abs()), e.z.abs());
+    return sqrt((e.x * e.x) + (e.y * e.y) + (e.z * e.z));
   }
 }
