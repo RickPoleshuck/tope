@@ -7,6 +7,8 @@ import '../settings/settings_view.dart';
 class AccelerometerListView extends StatefulWidget {
   static const routeName = '/';
 
+  const AccelerometerListView({super.key});
+
   @override
   State<AccelerometerListView> createState() => _AccelerometerListViewState();
 }
