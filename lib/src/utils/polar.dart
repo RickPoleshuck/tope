@@ -11,8 +11,8 @@ class Polar {
 
   Polar.fromCartesian(double x, double y, double z)
       : _rho = sqrt((x * x) + (y * y) + (z * z)),
-        _theta = atan2(y, x),
-        _phi = sqrt((x * x) + (y * y)) / z;
+        _theta = sqrt((x * x) + (y * y)) / z,
+        _phi = atan2(y, x);
 
   @override
   String toString() {
@@ -34,10 +34,12 @@ class Polar {
   double get theta => _theta;
 
   double get thetaDeg => rad2deg(_theta);
+
   double get phiDeg => rad2deg(_phi);
 
   double get rho => _rho;
-  static double rad2deg(double radians ){
+
+  static double rad2deg(double radians) {
     return radians * (180 / pi);
   }
 }
