@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tope/src/utils/polar.dart';
 import 'package:tope/src/utils/vector.dart';
 
 void main() {
@@ -13,7 +12,10 @@ void main() {
       print('v2=$v2, v2.mag=${v2.magnitude}');
       double diff = v1.compareDirection(-v2);
       print('diff Rad: $diff, diff deg: ${diff * (180/pi) }');
-
+      diff = v1.compareDirection(v1);
+      print('diff Rad: $diff, diff deg: ${diff * (180/pi) }');
+      diff = v1.compareDirection(-v1);
+      print('diff Rad: $diff, diff deg: ${diff * (180/pi) }');
     });
   });
 }

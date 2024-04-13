@@ -4,7 +4,7 @@ class Vector {
   final double _x;
   final double _y;
   final double _z;
-  late double _magnitude; // because the coordinates are immutable, we only have to compute this once.
+  double? _magnitude; // because the coordinates are immutable, we only have to compute this once.
 
   Vector(double x, double y, double z)
       : _x = x,
@@ -22,7 +22,7 @@ class Vector {
 
   double get magnitude {
     _magnitude ??= sqrt((_x * _x) + (_y * _y) + (_z * _z));
-    return _magnitude;
+    return _magnitude!;
   }
 
   double compareMagnitude(Vector other) {
