@@ -12,7 +12,7 @@ class Polar {
   Polar.fromCartesian(double x, double y, double z)
       : _rho = sqrt((x * x) + (y * y) + (z * z)),
         _theta = sqrt((x * x) + (y * y)) / z,
-        _phi = atan2(y, x);
+        _phi = _cart2phi(x, y);
 
   @override
   String toString() {
@@ -23,6 +23,16 @@ class Polar {
       : _rho = -p._rho,
         _theta = p._theta,
         _phi = -p._phi + pi;
+
+  static double _cart2phi(double x, double y) {
+    if (x < 0 && y > 0) {
+      return atan2(y, x) + pi;
+    }
+    if (x < 0 && y < 0) {
+      return atan2(y, x) - pi;
+    }
+    return atan2(y, x);
+  }
 
   /// return absolute value of angle difference
   double compareAngle(final Polar p1, final Polar p2) {
