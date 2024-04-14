@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
 import 'package:tope/src/utils/vector.dart';
 
@@ -10,6 +11,7 @@ import '../settings/settings_view.dart';
 class AccelerometerListView extends StatefulWidget {
   static const routeName = '/';
 
+
   const AccelerometerListView({super.key});
 
   @override
@@ -18,7 +20,7 @@ class AccelerometerListView extends StatefulWidget {
 
 class _AccelerometerListViewState extends State<AccelerometerListView> {
   final ListQueue<Widget> _bumps = ListQueue(30);
-
+  static final  DateFormat hhmm =  DateFormat('HH:mm');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +93,7 @@ class _AccelerometerListViewState extends State<AccelerometerListView> {
                 _bumps.addFirst(
                   ListTile(
                     title: Text(
-                      '${snapshot.data!.magnitude.toStringAsFixed(3)}: ${snapshot.data!.display()}',
+                      '${hhmm.format(DateTime.now())}: ${snapshot.data!.display()}',
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),

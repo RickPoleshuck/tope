@@ -43,6 +43,6 @@ class Vector {
   }
 
   String display() {
-    return '${_x.toStringAsFixed(2)}, ${_y.toStringAsFixed(2)}, ${_z.toStringAsFixed(2)}';
+    return '${magnitude.toStringAsFixed(2)}, x:${_x.toStringAsFixed(2)}, y:${_y.toStringAsFixed(2)}, z:${_z.toStringAsFixed(2)}';
   }
 }
