@@ -20,7 +20,7 @@ class AccelerometerListView extends StatefulWidget {
 
 class _AccelerometerListViewState extends State<AccelerometerListView> {
   final ListQueue<Widget> _bumps = ListQueue(30);
-  static final  DateFormat hhmm =  DateFormat('HH:mm');
+  static final  DateFormat hhmmss =  DateFormat('HH:mm:ss');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +93,7 @@ class _AccelerometerListViewState extends State<AccelerometerListView> {
                 _bumps.addFirst(
                   ListTile(
                     title: Text(
-                      '${hhmm.format(DateTime.now())}: ${snapshot.data!.display()}',
+                      '${hhmmss.format(DateTime.now())}: ${snapshot.data!.display()}',
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),
