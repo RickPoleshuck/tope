@@ -1,5 +1,8 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
+import 'package:tope/src/utils/vector.dart';
 
 import '../settings/settings_view.dart';
 
@@ -14,7 +17,7 @@ class AccelerometerListView extends StatefulWidget {
 }
 
 class _AccelerometerListViewState extends State<AccelerometerListView> {
-  final List<Widget> _bumps = [];
+  final ListQueue<Widget> _bumps = ListQueue(30);
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,9 @@ class _AccelerometerListViewState extends State<AccelerometerListView> {
           ),
         ],
       ),
-      body: StreamBuilder<double>(
+      body: StreamBuilder<Vector>(
         stream: AccelerometerService().listen().stream,
-        builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Vector> snapshot) {
           if (snapshot.hasError) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -85,16 +88,16 @@ class _AccelerometerListViewState extends State<AccelerometerListView> {
                   ],
                 );
               case ConnectionState.active:
-                _bumps.add(
+                _bumps.addFirst(
                   ListTile(
                     title: Text(
-                      'Acceleration: ${snapshot.data!.toStringAsFixed(3)}',
+                      '${snapshot.data!.magnitude.toStringAsFixed(3)}: ${snapshot.data!.display()}',
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),
                 );
                 return ListView(
-                  children: _bumps,
+                  children: _bumps.toList(growable: false),
                 );
               case ConnectionState.done:
                 return Column(

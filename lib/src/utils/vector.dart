@@ -11,7 +11,6 @@ class Vector {
         _y = y,
         _z = z;
 
-  @override
   Vector operator -() {
     return Vector(-_x, -_y, -_z);
   }
@@ -21,7 +20,6 @@ class Vector {
         _y = 0,
         _z = 9.8;
 
-  @override
   Vector operator -(Vector other) {
     return Vector(_x - other._x, _y - other._y, _z - other._z);
   }
@@ -42,5 +40,9 @@ class Vector {
   @override
   String toString() {
     return 'Vector{_x: $_x, _y: $_y, _z: $_z}';
+  }
+
+  String display() {
+    return '${_x.toStringAsFixed(2)}, ${_y.toStringAsFixed(2)}, ${_z.toStringAsFixed(2)}';
   }
 }
