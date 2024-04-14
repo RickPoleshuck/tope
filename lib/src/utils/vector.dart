@@ -16,6 +16,16 @@ class Vector {
     return Vector(-_x, -_y, -_z);
   }
 
+  Vector.up()
+      : _x = 0,
+        _y = 0,
+        _z = 9.8;
+
+  @override
+  Vector operator -(Vector other) {
+    return Vector(_x - other._x, _y - other._y, _z - other._z);
+  }
+
   double compareDirection(Vector other) {
     return acos(((_x * other._x) + (_y * other._y) + (_z * other._z)) / (magnitude * other.magnitude));
   }

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:tope/src/utils/vector.dart';
 
 void main() {
@@ -16,6 +17,9 @@ void main() {
       print('diff Rad: $diff, diff deg: ${diff * (180/pi) }');
       diff = v1.compareDirection(-v1);
       print('diff Rad: $diff, diff deg: ${diff * (180/pi) }');
+
+      Vector v3 = v1 - v2;
+      print(v3);
     });
   });
 }

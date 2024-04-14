@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:sensors_plus/sensors_plus.dart';
+import 'package:tope/src/utils/vector.dart';
 
 class AccelerometerService {
   double _threshold = 2.0;
-  static final AccelerometerService _singleton =
-      AccelerometerService._internal();
+  Vector? _up;
+  static final AccelerometerService _singleton = AccelerometerService._internal();
 
   factory AccelerometerService() {
     return _singleton;
@@ -19,8 +20,8 @@ class AccelerometerService {
   AccelerometerService._internal();
 
   Future<void> _listen(final StreamController<double> output) async {
-    userAccelerometerEventStream(samplingPeriod: SensorInterval.normalInterval)
-        .listen((UserAccelerometerEvent e) {
+    _up ??= await upVector();
+    userAccelerometerEventStream(samplingPeriod: SensorInterval.normalInterval).listen((UserAccelerometerEvent e) {
       final double acceleration = _getAcceleration(e);
       if (acceleration >= _threshold) {
         output.sink.add(acceleration);
@@ -34,8 +35,26 @@ class AccelerometerService {
     return streamController;
   }
 
-  /// Return maximum acceleration from all 3 directions.
   double _getAcceleration(UserAccelerometerEvent e) {
-    return sqrt((e.x * e.x) + (e.y * e.y) + (e.z * e.z));
+    return Vector(e.x, e.y, e.z).magnitude;
+  }
+
+  Future<void> _getRawStream(final StreamController<Vector> output) async {
+    accelerometerEventStream(samplingPeriod: const Duration(seconds: 1)).listen((AccelerometerEvent e) {
+      output.sink.add(Vector(e.x, e.y, e.z));
+    });
+  }
+
+  Future<Vector> _getRaw() async {
+    final streamController = StreamController<Vector>();
+    _getRawStream(streamController);
+    Vector result = await streamController.stream.first;
+    streamController.close();
+    return result;
+  }
+
+  Future<Vector> upVector() async {
+    Vector raw = await _getRaw();
+    return raw - Vector.up();
   }
 }
