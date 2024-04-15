@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
 #  location: ^6.0.1
@@ -33,3 +34,7 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+#flutter_launcher_icons:
+#  android: "launcher_icon"
+#  ios: true
+#  image_path: "assets/images/launch.png"
