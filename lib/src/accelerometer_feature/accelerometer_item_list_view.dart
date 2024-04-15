@@ -85,7 +85,7 @@ class _AccelerometerListViewState extends State<AccelerometerListView> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 16),
-                      child: Text('Awaiting bids...'),
+                      child: Text('Awaiting accelerations...'),
                     ),
                   ],
                 );
