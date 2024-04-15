@@ -19,7 +19,7 @@ class AccelerometerListView extends StatefulWidget {
 }
 
 class _AccelerometerListViewState extends State<AccelerometerListView> {
-  final ListQueue<Widget> _bumps = ListQueue(30);
+  final ListQueue<Widget> _bumps = ListQueue(1000);
   static final  DateFormat hhmmss =  DateFormat('HH:mm:ss');
   @override
   Widget build(BuildContext context) {
