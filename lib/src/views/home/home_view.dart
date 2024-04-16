@@ -5,27 +5,27 @@ import 'package:intl/intl.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
 import 'package:tope/src/utils/vector.dart';
 
-import '../settings/settings_view.dart';
+import '../../settings/settings_view.dart';
 
 /// Displays a list of SampleItems.
-class AccelerometerListView extends StatefulWidget {
+class HomeView extends StatefulWidget {
   static const routeName = '/';
 
 
-  const AccelerometerListView({super.key});
+  const HomeView({super.key});
 
   @override
-  State<AccelerometerListView> createState() => _AccelerometerListViewState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _AccelerometerListViewState extends State<AccelerometerListView> {
+class _HomeViewState extends State<HomeView> {
   final ListQueue<Widget> _bumps = ListQueue(1000);
   static final  DateFormat hhmmss =  DateFormat('HH:mm:ss');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Accelerations'),
+        title: const Text('Tope'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -35,7 +35,7 @@ class _AccelerometerListViewState extends State<AccelerometerListView> {
           ),
         ],
       ),
-      body: StreamBuilder<Vector>(
+      body:  StreamBuilder<Vector>(
         stream: AccelerometerService().listen().stream,
         builder: (BuildContext context, AsyncSnapshot<Vector> snapshot) {
           if (snapshot.hasError) {

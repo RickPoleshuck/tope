@@ -31,4 +31,21 @@ class AccelerometerService {
     _getAccelStream(streamController);
     return streamController;
   }
+
+  Future<void> _getGyroStream(final StreamController<Vector> output) async {
+    gyroscopeEventStream(samplingPeriod: SensorInterval.normalInterval).listen((GyroscopeEvent e) {
+      Vector accel = Vector(e.x, e.y, e.z);
+      if (accel.magnitude >= _threshold) {
+        output.sink.add(accel);
+      }
+    }, cancelOnError: true);
+  }
+
+  Future<Vector> getGyroUp() async {
+    final streamController = StreamController<Vector>();
+    _getGyroStream(streamController);
+    final Vector up = await streamController.stream.first;
+    streamController.close();
+    return up;
+  }
 }

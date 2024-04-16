@@ -18,6 +18,7 @@ dependencies:
 #  location: ^6.0.1
   intl: ^0.18.1
   sensors_plus: ^5.0.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
