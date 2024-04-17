@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
 import 'package:tope/src/utils/vector.dart';
 import 'package:tope/src/views/home/home_accel_list_item.dart';
@@ -43,20 +42,6 @@ class _HomeAccelListViewState extends State<HomeAccelListView> {
         } else {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.info,
-                    color: Colors.blue,
-                    size: 60,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Select a lot'),
-                  ),
-                ],
-              );
             case ConnectionState.waiting:
               return const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -66,10 +51,6 @@ class _HomeAccelListViewState extends State<HomeAccelListView> {
                     width: 60,
                     height: 60,
                     child: CircularProgressIndicator(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Awaiting accelerations...'),
                   ),
                 ],
               );
@@ -95,7 +76,7 @@ class _HomeAccelListViewState extends State<HomeAccelListView> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: Text('Acceleration: ${snapshot.data} (closed)'),
+                    child: Text('Gyro: ${snapshot.data} (closed)'),
                   ),
                 ],
               );

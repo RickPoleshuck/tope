@@ -39,20 +39,6 @@ class _HomeGyroViewState extends State<HomeGyroView> {
         } else {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.info,
-                    color: Colors.blue,
-                    size: 60,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Select a lot'),
-                  ),
-                ],
-              );
             case ConnectionState.waiting:
               return const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -62,16 +48,15 @@ class _HomeGyroViewState extends State<HomeGyroView> {
                     height: 60,
                     child: CircularProgressIndicator(),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Awaiting gyroscope...'),
-                  ),
                 ],
               );
             case ConnectionState.active:
               return Flexible(
                 flex: 1,
-                child: Text(snapshot.data!.display()),
+                child: Text(
+                  'Gyro ${snapshot.data!.display()}',
+                  style: const TextStyle(fontSize: 20),
+                ),
               );
             case ConnectionState.done:
               return Column(
