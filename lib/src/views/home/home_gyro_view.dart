@@ -1,25 +1,21 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
 import 'package:tope/src/utils/vector.dart';
-import 'package:tope/src/views/home/home_accel_list_item.dart';
 
-class HomeAccelListView extends StatefulWidget {
-  const HomeAccelListView({super.key});
+class HomeGyroView extends StatefulWidget {
+  const HomeGyroView({super.key});
 
   @override
-  State<HomeAccelListView> createState() => _HomeAccelListViewState();
+  State<HomeGyroView> createState() => _HomeGyroViewState();
 }
 
-class _HomeAccelListViewState extends State<HomeAccelListView> {
-  final ListQueue<Widget> _bumps = ListQueue(1000);
+class _HomeGyroViewState extends State<HomeGyroView> {
+  Vector? up;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Vector>(
-      stream: AccelerometerService().listenAccel().stream,
+      stream: AccelerometerService().listenGyro().stream,
       builder: (BuildContext context, AsyncSnapshot<Vector> snapshot) {
         if (snapshot.hasError) {
           return Column(
@@ -60,7 +56,6 @@ class _HomeAccelListViewState extends State<HomeAccelListView> {
             case ConnectionState.waiting:
               return const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
                     width: 60,
@@ -69,20 +64,14 @@ class _HomeAccelListViewState extends State<HomeAccelListView> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 16),
-                    child: Text('Awaiting accelerations...'),
+                    child: Text('Awaiting gyroscope...'),
                   ),
                 ],
               );
             case ConnectionState.active:
-              _bumps.addFirst(
-                HomeAccelListItem(snapshot.data!),
-              );
               return Flexible(
-                flex: 2,
-                child: ListView(
-                  children: _bumps.toList(growable: false),
-
-                ),
+                flex: 1,
+                child: Text(snapshot.data!.display()),
               );
             case ConnectionState.done:
               return Column(
