@@ -1,16 +1,7 @@
-typedef TimedCachePredicate<T> = bool Function(T v);
-
-class _TimedCacheEntry<T> {
-  final int _milliSecs;
-  final T _value;
-
-  _TimedCacheEntry(this._milliSecs, this._value);
-
-  int get milliSecs => _milliSecs;
-
-  T get value => _value;
-}
-
+///
+/// A collection where items get removed based on age.
+/// Although old items are never available, items are only physically removed when the collection is used.
+///
 class TimedCache<T> {
   TimedCache({int timeoutMilliSecs = 2000}) : _timeoutMilliSecs = timeoutMilliSecs;
   final int _timeoutMilliSecs;
@@ -40,4 +31,20 @@ class TimedCache<T> {
     _removeOld();
     return _data.map((e) => e.value).toList(growable: false);
   }
+}
+
+///
+/// Predicate used to search for items
+///
+typedef TimedCachePredicate<T> = bool Function(T v);
+
+class _TimedCacheEntry<T> {
+  final int _milliSecs;
+  final T _value;
+
+  _TimedCacheEntry(this._milliSecs, this._value);
+
+  int get milliSecs => _milliSecs;
+
+  T get value => _value;
 }
