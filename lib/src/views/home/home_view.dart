@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tope/src/views/home/home_accel_list_view.dart';
-import 'package:tope/src/views/home/home_gyro_view.dart';
+import 'package:tope/src/views/home/home_up_view.dart';
 
 import '../../settings/settings_view.dart';
 
@@ -33,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             HomeAccelListView(),
-            HomeGyroView(),
+            HomeUpView(),
           ],
         ));
   }

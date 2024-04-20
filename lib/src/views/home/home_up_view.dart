@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:tope/src/services/accelerometer_service.dart';
 import 'package:tope/src/utils/vector.dart';
 
-class HomeGyroView extends StatefulWidget {
-  const HomeGyroView({super.key});
+class HomeUpView extends StatefulWidget {
+  const HomeUpView({super.key});
 
   @override
-  State<HomeGyroView> createState() => _HomeGyroViewState();
+  State<HomeUpView> createState() => _HomeUpViewState();
 }
 
-class _HomeGyroViewState extends State<HomeGyroView> {
+class _HomeUpViewState extends State<HomeUpView> {
   Vector? up;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Vector>(
-      stream: AccelerometerService().listenGyro().stream,
+      stream: AccelerometerService().listenUp().stream,
       builder: (BuildContext context, AsyncSnapshot<Vector> snapshot) {
         if (snapshot.hasError) {
           return Column(
@@ -54,7 +54,7 @@ class _HomeGyroViewState extends State<HomeGyroView> {
               return Flexible(
                 flex: 1,
                 child: Text(
-                  'Gyro ${snapshot.data!.display()}',
+                  'Up ${snapshot.data!.display()}',
                   style: const TextStyle(fontSize: 20),
                 ),
               );

@@ -18,7 +18,7 @@ class _HomeAccelListViewState extends State<HomeAccelListView> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Vector>(
-      stream: AccelerometerService().listenAccel().stream,
+      stream: AccelerometerService().listenUserAccel().stream,
       builder: (BuildContext context, AsyncSnapshot<Vector> snapshot) {
         if (snapshot.hasError) {
           return Column(
@@ -76,7 +76,7 @@ class _HomeAccelListViewState extends State<HomeAccelListView> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: Text('Gyro: ${snapshot.data} (closed)'),
+                    child: Text('Up: ${snapshot.data} (closed)'),
                   ),
                 ],
               );
