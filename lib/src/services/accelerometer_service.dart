@@ -30,7 +30,7 @@ class AccelerometerService {
     userAccelerometerEventStream(samplingPeriod: SensorInterval.normalInterval).listen((UserAccelerometerEvent e) {
       _lastUserAccel = Vector(e.x, e.y, e.z);
       if (_lastUserAccel.magnitude >= _magnitudeThreshold &&
-          _lastAccel.compareDirection(_lastUserAccel) <= _angleThreshold) {
+          _lastAccel.compareDirection(-_lastUserAccel) <= _angleThreshold) {
         _ups.add(_lastAccel);
       } else if (_lastUserAccel.magnitude >= _magnitudeThreshold &&
           _ups.find((v) => _lastUserAccel.compareDirection(v) <= _angleThreshold).length > 0) {
